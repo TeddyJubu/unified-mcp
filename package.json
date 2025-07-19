@@ -1,0 +1,27 @@
+{
+  "name": "unified-mcp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "unified-mcp": "bin/unified-mcp"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeddyJubu/unified-mcp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/TeddyJubu/unified-mcp/issues"
+  },
+  "homepage": "https://github.com/TeddyJubu/unified-mcp#readme",
+  "dependencies": {
+    "axios": "^1.10.0"
+  }
+}
