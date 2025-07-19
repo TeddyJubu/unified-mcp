@@ -1,7 +1,7 @@
 {
   "name": "unified-mcp",
   "version": "1.0.0",
-  "description": "",
+  "description": "Unified toolkit for managing and interacting with Model Context Protocol (MCP) servers",
   "main": "index.js",
   "bin": {
     "unified-mcp": "bin/unified-mcp"
@@ -13,9 +13,9 @@
     "type": "git",
     "url": "git+https://github.com/TeddyJubu/unified-mcp.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["mcp", "model-context-protocol", "cli", "unified", "server", "management"],
+  "author": "TeddyJubu",
+  "license": "MIT",
   "type": "commonjs",
   "bugs": {
     "url": "https://github.com/TeddyJubu/unified-mcp/issues"
