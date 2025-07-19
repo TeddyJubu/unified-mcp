@@ -1,0 +1,28 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-filesystem", "/Users/teddyburtonburger"]
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-brave-search"],
+      "env": {
+        "BRAVE_API_KEY": "BSAFahkrrDgDaYMFtUbfFEpVZqgBFBQ"
+      }
+    },
+        "toolbox": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "@smithery/toolbox",
+        "--key",
+        "1928ae55-3c82-4b1d-832a-b9b91cc519e4",
+        "--profile",
+        "sick-dove-uUZyC1"
+      ]
+    }
+  }
+}
