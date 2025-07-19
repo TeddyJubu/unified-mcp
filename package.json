@@ -7,13 +7,22 @@
     "unified-mcp": "bin/unified-mcp"
   },
   "scripts": {
-    "test": "node --test test/**/*.test.js"
+    "test": "node --test test/**/*.test.js",
+    "lint": "eslint .",
+    "format": "prettier --write ."
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TeddyJubu/unified-mcp.git"
   },
-  "keywords": ["mcp", "model-context-protocol", "cli", "unified", "server", "management"],
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "cli",
+    "unified",
+    "server",
+    "management"
+  ],
   "author": "TeddyJubu",
   "license": "MIT",
   "type": "commonjs",
@@ -22,6 +31,18 @@
   },
   "homepage": "https://github.com/TeddyJubu/unified-mcp#readme",
   "dependencies": {
-    "axios": "^1.10.0"
+    "axios": "^1.10.0",
+    "express": "^5.1.0"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "eslint": "^9.31.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.3",
+    "jest": "^30.0.4",
+    "prettier": "^3.6.2",
+    "supertest": "^7.1.3"
   }
 }
