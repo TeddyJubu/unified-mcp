@@ -1,3 +1,144 @@
 #!/usr/bin/env node
 
-console.log('unified-mcp CLI - Coming Soon!');
+const fs = require('fs');
+const path = require('path');
+const os = require('os');
+
+// Default API ID
+const DEFAULT_API_ID = 'd1023c0f-8ff8-46c8-b237-4d2425734e22';
+
+// Parse command line arguments
+function parseArgs() {
+  const args = process.argv.slice(2);
+  const result = {
+    command: null,
+    apiId: DEFAULT_API_ID
+  };
+
+  for (let i = 0; i < args.length; i++) {
+    const arg = args[i];
+    
+    if (arg === '--api' && i + 1 < args.length) {
+      result.apiId = args[i + 1];
+      i++; // Skip next argument
+    } else if (!result.command && ['setup', 'update'].includes(arg)) {
+      result.command = arg;
+    }
+  }
+
+  return result;
+}
+
+// Setup command implementation
+function setupCommand(apiId) {
+  try {
+    const mcpDir = path.join(os.homedir(), '.mcp');
+    const configPath = path.join(mcpDir, 'config.json');
+    const repoConfigPath = path.join(__dirname, '..', 'config.json');
+    
+    // 1. Ensure ~/.mcp directory exists
+    if (!fs.existsSync(mcpDir)) {
+      fs.mkdirSync(mcpDir, { recursive: true });
+      console.log(`Created directory: ${mcpDir}`);
+    } else {
+      console.log(`Directory already exists: ${mcpDir}`);
+    }
+    
+    // 2. Copy config.json if it doesn't exist
+    if (!fs.existsSync(configPath)) {
+      if (fs.existsSync(repoConfigPath)) {
+        const configContent = fs.readFileSync(repoConfigPath, 'utf8');
+        fs.writeFileSync(configPath, configContent);
+        console.log(`Copied config.json to: ${configPath}`);
+      } else {
+        console.error(`Error: Cannot find config.json in repository`);
+        process.exit(1);
+      }
+    } else {
+      console.log(`Config file already exists: ${configPath}`);
+    }
+    
+    // 3. Print success message
+    console.log(`✅ Setup completed successfully!`);
+    console.log(`   API ID: ${apiId}`);
+    console.log(`   Config location: ${configPath}`);
+    
+  } catch (error) {
+    console.error(`Setup failed: ${error.message}`);
+    process.exit(1);
+  }
+}
+
+// Update command implementation (placeholder)
+function updateCommand(apiId) {
+  try {
+    const mcpDir = path.join(os.homedir(), '.mcp');
+    const configPath = path.join(mcpDir, 'config.json');
+    const repoConfigPath = path.join(__dirname, '..', 'config.json');
+    
+    // Check if config exists
+    if (!fs.existsSync(configPath)) {
+      console.log(`Config file not found. Running setup first...`);
+      setupCommand(apiId);
+      return;
+    }
+    
+    // Placeholder logic: copy/patch the config file
+    if (fs.existsSync(repoConfigPath)) {
+      const configContent = fs.readFileSync(repoConfigPath, 'utf8');
+      fs.writeFileSync(configPath, configContent);
+      console.log(`✅ Config updated successfully!`);
+      console.log(`   API ID: ${apiId}`);
+      console.log(`   Config location: ${configPath}`);
+    } else {
+      console.error(`Error: Cannot find config.json in repository`);
+      process.exit(1);
+    }
+    
+  } catch (error) {
+    console.error(`Update failed: ${error.message}`);
+    process.exit(1);
+  }
+}
+
+// Show usage information
+function showUsage() {
+  console.log(`
+Unified MCP CLI Tool
+`);
+  console.log(`Usage:`);
+  console.log(`  unified-mcp setup [--api <api-id>]    Setup MCP configuration`);
+  console.log(`  unified-mcp update [--api <api-id>]   Update MCP configuration`);
+  console.log(``);
+  console.log(`Options:`);
+  console.log(`  --api <api-id>    Override default API ID (default: ${DEFAULT_API_ID})`);
+  console.log(``);
+  console.log(`Examples:`);
+  console.log(`  unified-mcp setup`);
+  console.log(`  unified-mcp setup --api custom-api-id`);
+  console.log(`  unified-mcp update`);
+}
+
+// Main execution
+function main() {
+  const args = parseArgs();
+  
+  switch (args.command) {
+    case 'setup':
+      setupCommand(args.apiId);
+      break;
+      
+    case 'update':
+      updateCommand(args.apiId);
+      break;
+      
+    default:
+      showUsage();
+      process.exit(1);
+  }
+}
+
+// Run the CLI
+if (require.main === module) {
+  main();
+}
