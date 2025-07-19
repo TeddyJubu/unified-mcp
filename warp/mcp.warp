@@ -1,0 +1,4 @@
+# Warp alias for unified-mcp query command
+# Usage: Use this alias to quickly run unified-mcp query commands
+# Example: mcp "search for files" or mcp "help with coding"
+npx unified-mcp query "$@"
